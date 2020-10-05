@@ -4,18 +4,18 @@ import java.util.Scanner;
 
 public class TicTacToeGame {
 	public static final Scanner SC = new Scanner(System.in);
-	public static char b[] = new char[10];
+	public static char board[] = new char[10];
 
 	private static void fillBoard() {
-		b[0] = ' ';
+		board[0] = ' ';
 		for (int i = 1; i < 10; i++)
-			b[i] = ' ';
+			board[i] = ' ';
 	}
 
 	// UC 1 - Create Board
 	public static char[] createBoard() {
 		fillBoard();
-		return b;
+		return board;
 	}
 
 	// UC 2 - Check user and computer inputs
@@ -31,14 +31,14 @@ public class TicTacToeGame {
 	// UC 3 - Show Board
 	public static void showBoard() {
 		for (int i = 1; i < 10; i++) {
-			System.out.print(b[i++] + " | " + b[i++] + " | " + b[i]);
+			System.out.print(board[i++] + " | " + board[i++] + " | " + board[i]);
 			System.out.println();
 		}
 	}
 
 	// UC 4 - Check index to Make move
 	public static boolean isIndexEmpty(int index) {
-		if (index <= 9 && index > 0 && b[index] == ' ') {
+		if (index <= 9 && index > 0 && board[index] == ' ') {
 			return true;
 		} else
 			return false;
@@ -48,29 +48,33 @@ public class TicTacToeGame {
 	// UC 5 - Make move
 	public static void makeMove(int index, char move) {
 		if (isIndexEmpty(index)) {
-			b[index] = move;
+			board[index] = move;
 			showBoard();
 		} else
 			System.out.println("The index is already filled");
 
 	}
 
-	// U 6 - Do Toss
-	public static void doToss(String toss) {
-		if (toss.equalsIgnoreCase("head") || toss.equalsIgnoreCase("tail")) {
-			int t;
-			if (toss.equalsIgnoreCase("head"))
-				t = 0;
-			else
-				t = 1;
-			int tossResult = (int) Math.floor(Math.random() * 10) % 2;
-			if (tossResult == t) {
-				System.out.println("User Plays First");
-			} else
-				System.out.println("Computer plays first");
-		} else
-			System.out.println("Wrong input");
+	// UC6 - Do Toss
+	public static String doToss(String toss) {
+		int t;
+		if (toss.equalsIgnoreCase("head"))
+			t = 0;
+		else
+			t = 1;
+		int tossResult = (int) Math.floor(Math.random() * 10) % 2;
+		return (tossResult == t) ? "USER" : "COMPUTER";
+	}
 
+	// UC 7 - Wining Conditions
+	public static boolean viewWiningConditions(char c) {
+		return ((board[1] == c && board[2] == c && board[3] == c) || (board[4] == c && board[5] == c && board[6] == c)
+				|| (board[7] == c && board[8] == c && board[9] == c)
+				|| (board[1] == c && board[5] == c && board[9] == c)
+				|| (board[3] == c && board[5] == c && board[7] == c)
+				|| (board[1] == c && board[4] == c && board[7] == c)
+				|| (board[2] == c && board[5] == c && board[8] == c)
+				|| (board[3] == c && board[6] == c && board[9] == c));
 	}
 
 }

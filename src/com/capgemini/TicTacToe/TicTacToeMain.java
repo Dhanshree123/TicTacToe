@@ -8,68 +8,39 @@ public class TicTacToeMain {
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println("Welcome to game");
+		TicTacToeGame.createBoard();
+
+		System.out.println("User enter the input");
+		char inputs[] = TicTacToeGame.userInput();
+		System.out.println("User input " + inputs[0]);
+		System.out.println("Computer input " + inputs[1]);
+
+		System.out.println("User enter your choice(head/tail)");
+		String toss = sc.next();
+		System.out.println(TicTacToeGame.doToss(toss) + " won the toss");
+
+		System.out.println("Show board");
+		TicTacToeGame.showBoard();
+
 		while (true) {
-			System.out.println("Enter the choice");
-			System.out.println("1.Create Board");
-			System.out.println("2.Enter User input");
-			System.out.println("3.Show Board");
-			System.out.println("4.Check Index to Make Move User");
-			System.out.println("5.Make Move User");
-			System.out.println("6.Do Toss");
-			System.out.println("7.Exit");
+			System.out.println("User Make Your move");
+			System.out.println("Enter index you want from 1 to 9");
+			int index_move = sc.nextInt();
+			System.out.println("Enter your move");
+			char move = sc.next().charAt(0);
+			TicTacToeGame.makeMove(index_move, move);
 
-			int choice = sc.nextInt();
-			if (choice == 7)
+			System.out.println("Do you want to enter again(Y/N)");
+			String ans = sc.next();
+			if (ans.equalsIgnoreCase("N"))
 				break;
-
-			switch (choice) {
-			case 1:
-				char board[] = TicTacToeGame.createBoard();
-				break;
-
-			case 2:
-				System.out.println("User enter the input");
-				char inputs[] = TicTacToeGame.userInput();
-				System.out.println("User input " + inputs[0]);
-				System.out.println("Computer input " + inputs[1]);
-				break;
-
-			case 3:
-				System.out.println("Show board");
-				TicTacToeGame.showBoard();
-				break;
-
-			case 4:
-				System.out.println("User check index to Make Your move");
-				System.out.println("Enter index you want from 1 to 9");
-				int index = sc.nextInt();
-				boolean check = TicTacToeGame.isIndexEmpty(index);
-				if (check == true)
-					System.out.println("Index is free");
-				else
-					System.out.println("Index already filled");
-				break;
-
-			case 5:
-				System.out.println("User Make Your move");
-				System.out.println("Enter index you want from 1 to 9");
-				int index_move = sc.nextInt();
-				System.out.println("Enter your move");
-				char move = sc.next().charAt(0);
-				TicTacToeGame.makeMove(index_move, move);
-				break;
-
-			case 6:
-				System.out.println("User enter your choice(head/tail)");
-				String toss = sc.next();
-				TicTacToeGame.doToss(toss);
-				break;
-
-			default:
-				break;
-
-			}
 		}
+
+		boolean result = TicTacToeGame.viewWiningConditions(inputs[0]);
+		if (result == true)
+			System.out.println("User won");
+		else
+			System.out.println("Computer won");
 		sc.close();
 	}
 }
