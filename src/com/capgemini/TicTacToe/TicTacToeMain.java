@@ -15,10 +15,11 @@ public class TicTacToeMain {
 			System.out.println("3.Show Board");
 			System.out.println("4.Check Index to Make Move User");
 			System.out.println("5.Make Move User");
-			System.out.println("6.Exit");
+			System.out.println("6.Do Toss");
+			System.out.println("7.Exit");
 
 			int choice = sc.nextInt();
-			if (choice == 6)
+			if (choice == 7)
 				break;
 
 			switch (choice) {
@@ -42,7 +43,7 @@ public class TicTacToeMain {
 				System.out.println("User check index to Make Your move");
 				System.out.println("Enter index you want from 1 to 9");
 				int index = sc.nextInt();
-				boolean check = TicTacToeGame.makeMoveCheckIndex(index);
+				boolean check = TicTacToeGame.isIndexEmpty(index);
 				if (check == true)
 					System.out.println("Index is free");
 				else
@@ -56,6 +57,12 @@ public class TicTacToeMain {
 				System.out.println("Enter your move");
 				char move = sc.next().charAt(0);
 				TicTacToeGame.makeMove(index_move, move);
+				break;
+
+			case 6:
+				System.out.println("User enter your choice(head/tail)");
+				String toss = sc.next();
+				TicTacToeGame.doToss(toss);
 				break;
 
 			default:

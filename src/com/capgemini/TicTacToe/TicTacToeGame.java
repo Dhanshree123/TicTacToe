@@ -37,8 +37,8 @@ public class TicTacToeGame {
 	}
 
 	// UC 4 - Check index to Make move
-	public static boolean makeMoveCheckIndex(int index) {
-		if (b[index] == ' ') {
+	public static boolean isIndexEmpty(int index) {
+		if (index <= 9 && index > 0 && b[index] == ' ') {
 			return true;
 		} else
 			return false;
@@ -47,11 +47,29 @@ public class TicTacToeGame {
 
 	// UC 5 - Make move
 	public static void makeMove(int index, char move) {
-		if (makeMoveCheckIndex(index)) {
+		if (isIndexEmpty(index)) {
 			b[index] = move;
 			showBoard();
 		} else
 			System.out.println("The index is already filled");
+
+	}
+
+	// U 6 - Do Toss
+	public static void doToss(String toss) {
+		if (toss.equalsIgnoreCase("head") || toss.equalsIgnoreCase("tail")) {
+			int t;
+			if (toss.equalsIgnoreCase("head"))
+				t = 0;
+			else
+				t = 1;
+			int tossResult = (int) Math.floor(Math.random() * 10) % 2;
+			if (tossResult == t) {
+				System.out.println("User Plays First");
+			} else
+				System.out.println("Computer plays first");
+		} else
+			System.out.println("Wrong input");
 
 	}
 
