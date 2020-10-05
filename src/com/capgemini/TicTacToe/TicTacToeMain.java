@@ -17,30 +17,71 @@ public class TicTacToeMain {
 
 		System.out.println("User enter your choice(head/tail)");
 		String toss = sc.next();
-		System.out.println(TicTacToeGame.doToss(toss) + " won the toss");
+		int toss_result;
+		String result = TicTacToeGame.doToss(toss);
+		if(result.equals("USER"))
+			toss_result=1;
+		else
+			toss_result=2;
+		System.out.println(result + " won the toss");
 
 		System.out.println("Show board");
 		TicTacToeGame.showBoard();
 
-		while (true) {
-			System.out.println("User Make Your move");
-			System.out.println("Enter index you want from 1 to 9");
-			int index_move = sc.nextInt();
-			System.out.println("Enter your move");
-			char move = sc.next().charAt(0);
-			TicTacToeGame.makeMove(index_move, move);
+		boolean flag = false;
+		switch (toss_result) {
+		case 1:
+			while (true) {
+				System.out.println("User Make Your move");
+				System.out.println("Enter index you want from 1 to 9");
+				int index_move = sc.nextInt();
 
-			System.out.println("Do you want to enter again(Y/N)");
-			String ans = sc.next();
-			if (ans.equalsIgnoreCase("N"))
-				break;
+				TicTacToeGame.makeMove(index_move, inputs[0]);
+				boolean resultUser = TicTacToeGame.viewWiningConditions(inputs[0]);
+				if (resultUser == true) {
+					System.out.println("User won");
+					flag = true;
+					break;
+				}
+				TicTacToeGame.computerMakeMove(inputs[1]);
+				boolean resultComputer = TicTacToeGame.viewWiningConditions(inputs[1]);
+				if (resultComputer == true) {
+					System.out.println("Computer won");
+					flag = true;
+					break;
+				}
+				if (!(TicTacToeGame.isBoardHavingFreeSpace()))
+					break;
+			}
+			
+		case 2:
+			while (true) {
+				System.out.println("Computer Make Your move");
+				TicTacToeGame.computerMakeMove(inputs[1]);
+				boolean resultComputer = TicTacToeGame.viewWiningConditions(inputs[1]);
+				if (resultComputer == true) {
+					System.out.println("Computer won");
+					flag = true;
+					break;
+				}
+				System.out.println("User Make Your move");
+				System.out.println("Enter index you want from 1 to 9");
+				int index_move = sc.nextInt();
+				TicTacToeGame.makeMove(index_move, inputs[0]);
+				boolean resultUser = TicTacToeGame.viewWiningConditions(inputs[0]);
+				if (resultUser == true) {
+					System.out.println("User won");
+					flag = true;
+					break;
+				}
+				if (!(TicTacToeGame.isBoardHavingFreeSpace()))
+					break;
+			}
+
 		}
+		if (flag == false)
+			System.out.println("Game is Draw");
 
-		boolean result = TicTacToeGame.viewWiningConditions(inputs[0]);
-		if (result == true)
-			System.out.println("User won");
-		else
-			System.out.println("Computer won");
 		sc.close();
 	}
 }
