@@ -7,9 +7,9 @@ public class TicTacToeGame {
 	public static char b[] = new char[10];
 
 	private static void fillBoard() {
-		b[0] =' ';
+		b[0] = ' ';
 		for (int i = 1; i < 10; i++)
-				b[i] = ' ';
+			b[i] = ' ';
 	}
 
 	// UC 1 - Create Board
@@ -31,21 +31,18 @@ public class TicTacToeGame {
 	// UC 3 - Show Board
 	public static void showBoard() {
 		for (int i = 1; i < 10; i++) {
-			System.out.print(b[i++]+ " | " + b[i++]+ " | " + b[i]);
+			System.out.print(b[i++] + " | " + b[i++] + " | " + b[i]);
 			System.out.println();
 		}
 	}
-	
-	
-    // UC 4 - Make move
-	public static void makeMove(int index,char move) {
-		if(b[index] == ' ') {
-			b[index] = move; 
-			showBoard();
-		}
-		else
-			System.out.println("The index is alreay filled");
-		
+
+	// UC 4 - Check index to Make move
+	public static boolean makeMoveCheckIndex(int index) {
+		if (b[index] == ' ') {
+			return true;
+		} else
+			return false;
+
 	}
 
 }
