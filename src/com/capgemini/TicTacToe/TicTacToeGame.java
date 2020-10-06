@@ -50,8 +50,11 @@ public class TicTacToeGame {
 		if (isIndexEmpty(index)) {
 			board[index] = move;
 			showBoard();
-		} else
+		} else {
 			System.out.println("The index is already filled");
+			System.out.println("Enter different index");
+			makeMove(SC.nextInt(), move);
+		}
 
 	}
 
@@ -92,7 +95,11 @@ public class TicTacToeGame {
 		if (isIndexEmpty(index)) {
 			board[index] = c;
 			showBoard();
-		} else
+		} else {
 			System.out.println("The index is already filled");
+			System.out.println("Enter different index");
+			index = (int) (Math.floor(Math.random() * 10) % 9) + 1;
+			computerMakeMove(c);
+		}
 	}
 }

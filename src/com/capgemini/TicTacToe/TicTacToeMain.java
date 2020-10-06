@@ -10,7 +10,7 @@ public class TicTacToeMain {
 		System.out.println("Welcome to game");
 		TicTacToeGame.createBoard();
 
-		System.out.println("User enter the input");
+		System.out.println("User enter the input(X/O)");
 		char inputs[] = TicTacToeGame.userInput();
 		System.out.println("User input " + inputs[0]);
 		System.out.println("Computer input " + inputs[1]);
@@ -19,10 +19,10 @@ public class TicTacToeMain {
 		String toss = sc.next();
 		int toss_result;
 		String result = TicTacToeGame.doToss(toss);
-		if(result.equals("USER"))
-			toss_result=1;
+		if (result.equals("USER"))
+			toss_result = 1;
 		else
-			toss_result=2;
+			toss_result = 2;
 		System.out.println(result + " won the toss");
 
 		System.out.println("Show board");
@@ -43,6 +43,7 @@ public class TicTacToeMain {
 					flag = true;
 					break;
 				}
+				System.out.println("Computer Make Your move");
 				TicTacToeGame.computerMakeMove(inputs[1]);
 				boolean resultComputer = TicTacToeGame.viewWiningConditions(inputs[1]);
 				if (resultComputer == true) {
@@ -53,7 +54,7 @@ public class TicTacToeMain {
 				if (!(TicTacToeGame.isBoardHavingFreeSpace()))
 					break;
 			}
-			
+			break;
 		case 2:
 			while (true) {
 				System.out.println("Computer Make Your move");
@@ -77,6 +78,7 @@ public class TicTacToeMain {
 				if (!(TicTacToeGame.isBoardHavingFreeSpace()))
 					break;
 			}
+			break;
 
 		}
 		if (flag == false)
